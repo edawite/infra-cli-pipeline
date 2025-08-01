@@ -1,0 +1,30 @@
+# Default configuration for the infra-cli pipeline. All values can be
+# overridden via command‑line flags or a custom config file. Paths are
+# relative to the project root unless overridden on the command line.
+
+input_dir: ./data
+output_file: ./results/output.jsonl
+checkpoint_file: ./results/checkpoints.txt
+workers: 4
+max_queue_size: 64
+
+# Rate limiting controls how many files per second may enter the pipeline.
+# This prevents overloading downstream systems (e.g. LLM APIs). A
+# token‑bucket implementation in utils/rate_limiter.py enforces this rate.
+rate_limit_per_sec: 10
+
+backoff:
+  # Maximum number of retries for transient errors in parse and classify
+  # stages. Exponential backoff with jitter is applied between retries.
+  retries: 3
+  base_delay: 0.2  # seconds
+
+metrics:
+  enabled: true
+  port: 8000
+  prefix: infra_cli
+
+logging:
+  level: INFO
+  json: true
+  file: ./results/infra_cli.log
