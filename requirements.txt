@@ -1,0 +1,9 @@
+# Core runtime dependencies
+typer[all]>=0.9
+PyYAML>=6.0
+prometheus_client>=0.15
+pdfminer.six>=20221105
+
+# Development and testing
+pytest>=7.4
+flake8>=6.1
